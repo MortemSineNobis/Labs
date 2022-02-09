@@ -73,17 +73,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Engine\CastlePiece.cs" />
     <Compile Include="Engine\ChessBoard.cs" />
-    <Compile Include="Engine\ChessGame.cs" />
-    <Compile Include="Engine\Chessman.cs" />
-    <Compile Include="Engine\Chessmans\Bishop.cs" />
-    <Compile Include="Engine\Chessmans\King.cs" />
-    <Compile Include="Engine\Chessmans\Knight.cs" />
-    <Compile Include="Engine\Chessmans\Pawn.cs" />
-    <Compile Include="Engine\Chessmans\Queen.cs" />
-    <Compile Include="Engine\Chessmans\Rook.cs" />
-    <Compile Include="Engine\Direction.cs" />
-    <Compile Include="Engine\GameGraphics.cs" />
+    <Compile Include="Engine\ChessPiece.cs" />
+    <Compile Include="Engine\Enumerators.cs" />
+    <Compile Include="Engine\Pieces\Bishop.cs" />
+    <Compile Include="Engine\Pieces\King.cs" />
+    <Compile Include="Engine\Pieces\Knight.cs" />
+    <Compile Include="Engine\Pieces\Pawn.cs" />
+    <Compile Include="Engine\Pieces\Queen.cs" />
+    <Compile Include="Engine\Pieces\Rook.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -3,442 +3,359 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Chess.Engine.Chessmans;
 
 namespace Chess.Engine
 {
-    /// <summary>
-    /// Provides the data structure and algorithms for dealing with a chess board
-    /// </summary>
     public class ChessBoard
     {
-        /// <summary>
-        /// Represents one chess cell in the <seealso cref="ChessBoard.cells"/>
-        /// </summary>
-        public class Cell
-        {
-            /// <summary>
-            /// The parent chess board
-            /// </summary>
-            public ChessBoard Parent
-            {
-                private set;
-                get;
-            }
-
-            /// <summary>
-            /// 0-7 -> A-H mapping on an actual chessboard 
-            /// </summary>
-            public int X;
-            /// <summary>
-            /// 0-7 -> 1-8 mapping on an actual chessboard
-            /// </summary>
-            public int Y;
-
-            /// <summary>
-            /// The chessman present at the cell (can be null). Should only be set by <see cref="ChessBoard"/>.
-            /// </summary>
-            public Chessman Chessman;
-
-            /// <summary>
-            /// All the chessmans that can hit this cell.
-            /// </summary>
-            public List<Chessman> HitBy;
-
-            public Cell(ChessBoard parent, int x, int y)
-            {
-                Parent = parent;
-                HitBy = new List<Chessman>();
-                X = x;
-                Y = y;
-            }
-
-            /// <summary>
-            /// Returns cells on the board in a relative direction to this one.
-            /// </summary>
-            /// <param name="dirX">The X-direction component in which to search</param>
-            /// <param name="dirY">The Y-direction component in which to search</param>
-            /// <param name="desiredCount">The ammount of consecutive cells to return (until outside of the board)</param>
-            /// <returns>Collection of cells which are in the line of sight</returns>
-            public IEnumerable<Cell> OpenLineOfSight(int dirX, int dirY, int desiredCount = 1)
-            {
-                for (int i = 1; i <= desiredCount; i++)
-                {
-                    //Query the parent for a cell, if null the cell is out of the board and we should stop
-                    Cell cell = Parent.GetCell(X + dirX * i, Y + dirY * i);
-                    if (cell == null) yield break;
-
-                    yield return cell;
-
-                    //Stop anyway as line of sight is blocked
-                    if (cell.Chessman != null)
-                        yield break;
-                }
-            }
-
-            /// <summary>
-            /// Returns a cell on the board relative to this one.
-            /// </summary>
-            /// <param name="x">Relative X-coordinate of the cell</param>
-            /// <param name="y">Relative X-coordinate of the cell</param>
-            /// <returns>Node at (x, y) position or null if index is out of bounds</returns>
-            public Cell Open(int x, int y)
-            {
-                //Query the parent for a cell, if null the cell is out of the board and we should not return
-                Cell cell = Parent.GetCell(X + x, Y + y);
-                return cell ?? null;
-            }
-        }
-
-        /// <summary>
-        /// Contains information about the cells and the links between them
-        /// </summary>
-        private Cell[,] cells;
-
-        /// <summary>
-        /// The cell to hit for en passant
-        /// </summary>
-        public Cell EnPassant
-        {
-            private set;
-            get;
-        }
-
-        /// <summary>
-        /// The cell where the pawn will be captured after en passant is performed
-        /// </summary>
-        public Cell EnPassantCapture
-
-        {
-            private set;
-            get;
-        }
-
-        /// <summary>
-        /// List holding all the existing chessmans
-        /// </summary>
-        private List<Chessman> chessmans = new List<Chessman>();
-
-        private Chessman blackKing;
-        private Chessman whiteKing;
-
-        /// <summary>
-        /// Caches the <see cref = "IsInCheck" /> method's result
-        /// </summary>
-        private bool inCheck;
+        private ChessPiece[,] boardArray;
+        private const int COLUMNS = 8;
+        private int ROWS = 8;
 
         public ChessBoard()
         {
-            Reset();
+            SetupBoard();
         }
 
-        #region Getters
-
-        /// <summary>
-        /// Get cell by absolute coordinates
-        /// </summary>
-        /// <param name="x">Absolute X-coord</param>
-        /// <param name="y">Absolute Y-coord</param>
-        /// <returns>Node at (x, y) position or null if index is out of bounds</returns>
-        public Cell GetCell(int x, int y)
+        public int GetLength(int l)
         {
-            if (x < 0 || cells.GetLength(0) <= x || y < 0 || cells.GetLength(1) <= y) return null;
-
-            return cells[x, y];
+            return boardArray.GetLength(l);
         }
 
-        #endregion
-
-        #region HelperMethods
-
-        /// <summary>
-        /// Adds a chessman in the beggining of the chess game, can also be used for promotion
-        /// </summary>
-        /// <param name="cell">The cell to add to</param>
-        /// <param name="chessman"></param>
-        private void addChessman(Cell cell, Chessman chessman)
+        public ChessPiece this[int x, int y]
         {
-            cell.Chessman = chessman;
-            chessmans.Add(chessman);
-            chessman.OnPlace(cell);
+            get { return boardArray[x, y]; }
         }
 
-        #endregion
-
-        #region InterfaceMethods
-
-        /// <summary>
-        /// Resets the board state
-        /// </summary>
-        public void Reset()
+        private ChessBoard SetupBoard()
         {
-            cells = new Cell[8, 8];
-            for (int i = 0; i < 8; i++)
+            boardArray = new ChessPiece[COLUMNS, ROWS];
+            string[] playerPeices = {
+                "Rook", "Knight", "Bishop", "Queen",
+                "King", "Bishop", "Knight", "Rook",
+                "Pawn", "Pawn", "Pawn", "Pawn",
+                "Pawn", "Pawn", "Pawn", "Pawn" };
+
+            for (int i = 0; i < COLUMNS; i++)
             {
-                for (int j = 0; j < 8; j++)
+                // Player 0 pieces
+                boardArray[i, 0] = (ChessPiece)Activator.CreateInstance(
+                                                Type.GetType("Chess." + playerPeices[i]));
+                boardArray[i, 1] = (ChessPiece)Activator.CreateInstance(
+                                                Type.GetType("Chess." + playerPeices[i + COLUMNS]));
+                // Player 1 pieces
+                boardArray[i, ROWS - 1] = (ChessPiece)Activator.CreateInstance(
+                                                Type.GetType("Chess." + playerPeices[i]), new object[] { 1 });
+                boardArray[i, ROWS - 2] = (ChessPiece)Activator.CreateInstance(
+                                                Type.GetType("Chess." + playerPeices[i + COLUMNS]), new object[] { 1 });
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// Рассчитывает действия, доступные для шахматной фигуры в наборе координат.
+        /// </summary>
+        /// <param name="x">Количество клеток справа от нижнего левого квадрата</param>
+        /// <param name="y">Количество клеток над нижним левым квадратом</param>
+        /// <param name="ignoreCheck">Не проверять на угрозы королю</param>
+        /// <param name="attackActions">Рассчет возможных атак</param>
+        /// <param name="moveActions">Рассчет возможных перемещений</param>
+        /// <param name="boardArray">Поле (доска)</param>
+        /// <returns>Возвращает список возможных перемещений</returns>
+        public IEnumerable<Point> PieceActions(int x, int y, bool ignoreCheck = false, bool attackActions = true, bool moveActions = true, ChessPiece[,] boardArray = null)
+        {
+            if (boardArray == null)
+            {
+                boardArray = this.boardArray;
+            }
+
+            bool[,] legalActions = new bool[boardArray.GetLength(0), boardArray.GetLength(1)];
+            List<Point> availableActions = new List<Point>();
+            ChessPiece movingPeice = boardArray[x, y];
+
+            if (attackActions)
+            {
+                foreach (Point[] direction in movingPeice.AvailableAttacks)
                 {
-                    cells[i, j] = new Cell(this, i, j);
-                }
-            }
-
-            chessmans.Clear();
-
-            EnPassant = null;
-            EnPassantCapture = null;
-
-            addChessman(cells[0, 0], new Rook(PlayerColor.White));
-            addChessman(cells[1, 0], new Knight(PlayerColor.White));
-            addChessman(cells[2, 0], new Bishop(PlayerColor.White));
-            addChessman(cells[3, 0], new Queen(PlayerColor.White));
-            addChessman(cells[4, 0], (whiteKing = new King(PlayerColor.White)));
-            addChessman(cells[5, 0], new Bishop(PlayerColor.White));
-            addChessman(cells[6, 0], new Knight(PlayerColor.White));
-            addChessman(cells[7, 0], new Rook(PlayerColor.White));
-
-            addChessman(cells[0, 1], new Pawn(PlayerColor.White));
-            addChessman(cells[1, 1], new Pawn(PlayerColor.White));
-            addChessman(cells[2, 1], new Pawn(PlayerColor.White));
-            addChessman(cells[3, 1], new Pawn(PlayerColor.White));
-            addChessman(cells[4, 1], new Pawn(PlayerColor.White));
-            addChessman(cells[5, 1], new Pawn(PlayerColor.White));
-            addChessman(cells[6, 1], new Pawn(PlayerColor.White));
-            addChessman(cells[7, 1], new Pawn(PlayerColor.White));
-
-            addChessman(cells[0, 6], new Pawn(PlayerColor.Black));
-            addChessman(cells[1, 6], new Pawn(PlayerColor.Black));
-            addChessman(cells[2, 6], new Pawn(PlayerColor.Black));
-            addChessman(cells[3, 6], new Pawn(PlayerColor.Black));
-            addChessman(cells[4, 6], new Pawn(PlayerColor.Black));
-            addChessman(cells[5, 6], new Pawn(PlayerColor.Black));
-            addChessman(cells[6, 6], new Pawn(PlayerColor.Black));
-            addChessman(cells[7, 6], new Pawn(PlayerColor.Black));
-
-            addChessman(cells[0, 7], new Rook(PlayerColor.Black));
-            addChessman(cells[1, 7], new Knight(PlayerColor.Black));
-            addChessman(cells[2, 7], new Bishop(PlayerColor.Black));
-            addChessman(cells[3, 7], new Queen(PlayerColor.Black));
-            addChessman(cells[4, 7], (blackKing = new King(PlayerColor.Black)));
-            addChessman(cells[5, 7], new Bishop(PlayerColor.Black));
-            addChessman(cells[6, 7], new Knight(PlayerColor.Black));
-            addChessman(cells[7, 7], new Rook(PlayerColor.Black));
-
-            foreach (Chessman chessman in chessmans)
-            {
-                chessman.Recalculate();
-            }
-        }
-
-        /// <summary>
-        /// Called at the start of every turn. Recalcualtes legal moves.
-        /// </summary>
-        /// <param name="currentPlayer">The player whose turn is to move</param>
-        /// <returns>Whether the player had any moves</returns>
-        public bool TurnStart(PlayerColor currentPlayer)
-        {
-            inCheck = IsInCheck(currentPlayer, false);
-            bool anyLegalMove = false;
-            //Clear cell hit lists
-            foreach (Cell cell in cells)
-            {
-                cell.HitBy.Clear();
-            }
-
-            //Recalculate possible moves and hit lists for cells
-            foreach (Chessman chessman in chessmans)
-            {
-                chessman.Recalculate();
-            }
-
-            //Calculate legal moves
-            foreach (Chessman chessman in chessmans)
-            {
-                chessman.LegalMoves.Clear();
-                foreach (Cell move in chessman.PossibleMoves)
-                {
-                    if (chessman.Color == currentPlayer && isMoveLegal(chessman, move))
+                    foreach (Point attackPoint in direction)
                     {
-                        chessman.LegalMoves.Add(move);
-                        anyLegalMove = true;
+                        Point adjustedPoint = new Point(attackPoint.x + x, attackPoint.y + y);
+                        if (ValidatePoint(adjustedPoint))
+                        {
+                            if (boardArray[adjustedPoint.x, adjustedPoint.y] != null
+                                && boardArray[adjustedPoint.x, adjustedPoint.y].Player ==
+                                movingPeice.Player) break;
+                            if (boardArray[adjustedPoint.x, adjustedPoint.y] != null)
+                            {
+                                AddMove(availableActions, new Point(x, y), adjustedPoint, ignoreCheck);
+                                break;
+                            }
+                        }
                     }
                 }
             }
 
-            return anyLegalMove;
-        }
-
-        /// <summary>
-        /// Validates if a move is legal for a given chessman
-        /// </summary>
-        /// <param name="chessman">Chessman to move</param>
-        /// <param name="move">Where the chessman moves</param>
-        /// <returns></returns>
-        private bool isMoveLegal(Chessman chessman, Cell move)
-        {
-            Chessman currentKing = chessman.Color == PlayerColor.White ? whiteKing : blackKing;
-            //The strategy is to try everything that can fail and return true only if nothing fails
-
-            //If it's the king check if it moved into a check (or didn't move out that's really the same thing)
-            if (chessman is King)
+            if (moveActions)
             {
-                //If some enemy hits where we move we can't move with the king
-                foreach (Chessman hitter in move.HitBy)
+                foreach (Point[] direction in movingPeice.AvailableMoves)
                 {
-                    if (hitter.Parent != move && hitter.Color != chessman.Color)
-                        return false;
+                    foreach (Point movePoint in direction)
+                    {
+                        Point adjustedPoint = new Point(movePoint.x + x, movePoint.y + y);
+                        if (ValidatePoint(adjustedPoint))
+                        {
+                            if (boardArray[adjustedPoint.x, adjustedPoint.y] != null) break;
+                            AddMove(availableActions, new Point(x, y), adjustedPoint, ignoreCheck);
+                        }
+                    }
+                }
+            }
+
+            if (movingPeice is King && ((King)movingPeice).CanCastle)
+            {
+                int rookX = 0;
+                if (boardArray[rookX, y] is Rook && ((Rook)boardArray[rookX, y]).CanCastle)
+                {
+                    bool missedCondition = false;
+                    foreach (int rangeX in Enumerable.Range(rookX + 1, Math.Abs(rookX - x) - 1))
+                    {
+                        if (boardArray[rangeX, y] != null) missedCondition = true;
+                    }
+                    missedCondition = missedCondition || KingInCheck(movingPeice.Player);
+                    if (!missedCondition)
+                        AddMove(availableActions, new Point(x, y), new Point(x - 2, y), ignoreCheck);
+                }
+                rookX = COLUMNS - 1;
+                if (boardArray[rookX, y] is Rook && ((Rook)boardArray[rookX, y]).CanCastle)
+                {
+                    bool missedCondition = false;
+                    foreach (int rangeX in Enumerable.Range(x + 1, Math.Abs(rookX - x) - 1))
+                    {
+                        if (boardArray[rangeX, y] != null) missedCondition = true;
+                    }
+                    missedCondition = missedCondition || KingInCheck(movingPeice.Player);
+                    if (!missedCondition)
+                        AddMove(availableActions, new Point(x, y), new Point(x + 2, y), ignoreCheck);
+                }
+            }
+
+            if (movingPeice is Pawn)
+            {
+                Pawn pawn = (Pawn)movingPeice;
+                int flipDirection = 1;
+
+                if (pawn.Player == 1) flipDirection = -1;
+                if (pawn.CanEnPassantLeft)
+                {
+                    Point attackPoint;
+                    attackPoint = ChessPiece.GetDiagnalMovementArray(1, DiagnalDirection.FORWARD_LEFT)[0];
+                    attackPoint.y *= flipDirection;
+                    attackPoint.y += y;
+                    attackPoint.x += x;
+                    if (ValidatePoint(attackPoint))
+                    {
+                        AddMove(availableActions, new Point(x, y), attackPoint, ignoreCheck);
+                    }
                 }
 
-                //Validate castling
-                if (Math.Abs(move.X - chessman.Parent.X) == 2)
+                if (pawn.CanEnPassantRight)
                 {
-                    //You can't castle in check
-                    if (inCheck)
-                        return false;
-
-                    //Check if some enemy hits the middle castling
-                    foreach (Chessman hitter in GetCell(move.X > chessman.Parent.X ? move.X - 1 : move.X + 1, move.Y).HitBy)
+                    Point attackPoint;
+                    attackPoint = ChessPiece.GetDiagnalMovementArray(1, DiagnalDirection.FORWARD_RIGHT)[0];
+                    attackPoint.y *= flipDirection;
+                    attackPoint.y += y;
+                    attackPoint.x += x;
+                    if (ValidatePoint(attackPoint))
                     {
-                        if (hitter.Color != chessman.Color)
+                        AddMove(availableActions, new Point(x, y), attackPoint, ignoreCheck);
+                    }
+                }
+            }
+
+            return availableActions;
+        }
+
+        private void AddMove(List<Point> availableActions, Point fromPoint, Point toPoint, bool ignoreCheck = false)
+        {
+            bool kingInCheck = false;
+
+            if (!ignoreCheck)
+            {
+                ChessPiece movingPiece = boardArray[fromPoint.x, fromPoint.y];
+                ChessPiece[,] boardArrayBackup = (ChessPiece[,])boardArray.Clone();
+                ActionPiece(fromPoint, toPoint, true);
+                kingInCheck = KingInCheck(movingPiece.Player);
+                boardArray = boardArrayBackup;
+            }
+
+            if (ignoreCheck || !kingInCheck) availableActions.Add(toPoint);
+        }
+
+        public bool KingInCheck(int player)
+        {
+            for (int x = 0; x < COLUMNS; x++)
+            {
+                for (int y = 0; y < ROWS; y++)
+                {
+                    ChessPiece chessPiece = boardArray[x, y];
+                    if (chessPiece != null
+                        && chessPiece.Player == player
+                        && chessPiece is King)
+                    {
+                        if (CheckSquareVulnerable(x, y, player))
+                        {
+                            return true;
+                        }
+                        else
+                        {
                             return false;
+                        }
                     }
                 }
             }
-            else //Non-king chessmans
+            throw new Exception("King wasn't found!");
+        }
+
+        public IEnumerable<Point> PieceActions(Point position, bool ignoreCheck = false, bool attackActions = true, bool moveActions = true, ChessPiece[,] boardArray = null)
+        {
+            return PieceActions(position.x, position.y, ignoreCheck, attackActions, moveActions, boardArray);
+        }
+
+        /// <summary>
+        /// Перемещение фигуры на доске.
+        /// </summary>
+        /// <param name="fromX">Начальное положение фигуры по x.</param>
+        /// <param name="fromY">Начальное положение фигуры по y.</param>
+        /// <param name="toX">Конечное положение фигуры по x.</param>
+        /// <param name="toY">Конечное положение фигуры по y.</param>
+        /// <returns>Возвращает true при удачном исходе, в противном случае - false.</returns>
+        public bool ActionPiece(int fromX, int fromY, int toX, int toY)
+        {
+            return ActionPiece(new Point(fromX, fromY), new Point(toX, toY));
+        }
+
+        /// <summary>
+        /// Перемещение фигуры на доске.
+        /// </summary>
+        /// <param name="from">НАчальное положение фигуры.</param>
+        /// <param name="to">Конечное положение фигуры.</param>
+        /// <returns>Возвращает true при удачном исходе, в противном случае - false.</returns>
+        public bool ActionPiece(Point from, Point to, bool bypassValidaiton = false)
+        {
+            if (bypassValidaiton || PieceActions(from).Contains(to))
             {
-                if (inCheck) //If player is in in check and if move resolves that
+                ChessPiece movingPeice = boardArray[from.x, from.y];
+                if (movingPeice is Pawn)
                 {
-                    //Let's try capturing or blocking the attacker, keep in mind that we can't unblock another attacker
-                    foreach (Chessman hitter in currentKing.Parent.HitBy)
+                    Pawn pawn = (Pawn)movingPeice;
+                    // If this was a double jump, check enpassant
+                    if (Math.Abs(from.y - to.y) == 2)
                     {
-                        if (hitter.Color == currentKing.Color) continue; //Same color don't care
-                        if (hitter.Parent == move) continue; //Was captured
-                        if (hitter.IsBlockedIfMove(chessman.Parent, move, currentKing.Parent)) continue;
+                        int adjasentX = to.x - 1;
+                        if (adjasentX > -1
+                            && boardArray[adjasentX, to.y] != null
+                            && boardArray[adjasentX, to.y].Player != movingPeice.Player
+                            && boardArray[adjasentX, to.y] is Pawn)
+                        {
+                            if (!bypassValidaiton)
+                                ((Pawn)boardArray[adjasentX, to.y]).CanEnPassantRight = true;
+                        }
+                        adjasentX += 2;
+                        if (adjasentX < COLUMNS
+                            && boardArray[adjasentX, to.y] != null
+                            && boardArray[adjasentX, to.y].Player != movingPeice.Player
+                            && boardArray[adjasentX, to.y] is Pawn)
+                        {
+                            if (!bypassValidaiton)
+                                ((Pawn)boardArray[adjasentX, to.y]).CanEnPassantLeft = true;
+                        }
+                    }
+                    if (from.x != to.x && boardArray[to.x, to.y] == null)
+                    {
+                        boardArray[to.x, from.y] = null;
+                    }
 
-                        return false;
+                    if (!bypassValidaiton) // Пешка не может ходить на 2 клетки после первого хода ей.
+                        pawn.CanDoubleJump = false;
+                }
+                if (movingPeice is CastlePiece)
+                {
+                    CastlePiece rookOrKing = (CastlePiece)movingPeice;
+                    if (!bypassValidaiton) 
+                        rookOrKing.CanCastle = false;
+                }
+                if (movingPeice is King)
+                {
+                    King king = (King)movingPeice;
+                    if (from.x - to.x == 2)
+                    {   // Move rook for Queenside castle
+                        boardArray[to.x + 1, from.y] = boardArray[0, from.y];
+                        boardArray[0, from.y] = null;
+                    }
+                    if (from.x - to.x == -2)
+                    {   // Move rook for Kingside castle
+                        boardArray[to.x - 1, from.y] = boardArray[COLUMNS - 1, from.y];
+                        boardArray[COLUMNS - 1, from.y] = null;
                     }
                 }
+                movingPeice.CalculateMoves();
+                boardArray[from.x, from.y] = null;
+                boardArray[to.x, to.y] = movingPeice;
+                return true;
+            }
+            return false;
+        }
 
-                //Check if a blocker moving away results in a check
-                //This also prevents chessmans capturing an attacker and exposing the king to another
-                foreach (Chessman hitter in chessman.Parent.HitBy)
+        /// <summary>
+        /// Проверка клетки на уязвимость перед противником
+        /// </summary>
+        /// <param name="player">Текущий игрок</param>
+        /// <param name="boardArray">Поле (доска).</param>
+        /// <returns>Возвращает true, если клетка может быть атакована</returns>
+        public bool CheckSquareVulnerable(int squareX, int squareY, int player, ChessPiece[,] boardArray = null)
+        {
+            if (boardArray == null)
+            {
+                boardArray = this.boardArray;
+            }
+
+            for (int x = 0; x < boardArray.GetLength(0); x++)
+            {
+                for (int y = 0; y < boardArray.GetLength(1); y++)
                 {
-                    if (hitter.Color == currentKing.Color) continue; //If it's the same color we don't care
-                    if (hitter.Parent == move) continue; //If we hit it it can not block
-
-                    if (!hitter.IsBlockedIfMove(chessman.Parent, move, currentKing.Parent))
-                        return false;
+                    if (boardArray[x, y] != null && boardArray[x, y].Player != player)
+                    {
+                        foreach (Point point in PieceActions(x, y, true, true, false, boardArray))
+                        {
+                            if (point.x == squareX && point.y == squareY)
+                            {
+                                return true;
+                            }
+                        }
+                    }
                 }
             }
-
-
-            return true;
+            return false;
         }
 
-        /// <summary>
-        /// Checks if a player is currently in check (their king can be hit)
-        /// </summary>
-        /// <param name="player">The player's color to check</param>
-        /// <param name="useCache">Uses the cached value for the current turn</param>
-        /// <returns></returns>
-        public bool IsInCheck(PlayerColor player, bool useCache = true)
+        private bool ValidateRange(int value, int high, int low = -1)
         {
-            if (useCache)
-                return inCheck;
-
-            if (player == PlayerColor.White)
-                return whiteKing.Parent.HitBy.Any(hitter => hitter.Color != player);
-            else
-                return blackKing.Parent.HitBy.Any(hitter => hitter.Color != player);
+            return value > low && value < high;
         }
 
-        /// <summary>
-        /// Move a chessman from one cell the the other, after this function is called the turn MUST end
-        /// </summary>
-        /// <param name="from">Node where the moved chessman is</param>
-        /// <param name="to">Node to move to</param>
-        /// <param name="promoteOption">The option chosed when promoting a pawn, will be ignored if the movement does not involve pormotion.</param>
-        public void Move(Cell from, Cell to, PromoteOptions promoteOption)
+        public bool ValidateX(int value)
         {
-            //Capture a chessman if moved on it
-            if (to.Chessman != null)
-                chessmans.Remove(to.Chessman);
-
-            to.Chessman = from.Chessman;
-            from.Chessman = null;
-
-            //Handles en passant captures
-            if (to == EnPassant && to.Chessman is Pawn)
-            {
-                chessmans.Remove(EnPassantCapture.Chessman);
-                EnPassantCapture.Chessman = null;
-            }
-
-            //Castling to the right
-            if (to.Chessman is King && to.X - from.X == 2)
-            {
-                Move(GetCell(7, to.Y), GetCell(to.X - 1, to.Y), promoteOption); //Move the rook as well
-            }
-
-            //Castling to the left
-            if (to.Chessman is King && to.X - from.X == -2)
-            {
-                Move(GetCell(0, to.Y), GetCell(to.X + 1, to.Y), promoteOption); //Move the rook as well
-            }
-
-            //Handles promotion
-            if (to.Chessman is Pawn && to.Y == (to.Chessman.Color == PlayerColor.White ? 7 : 0))
-            {
-                Chessman promoted = null; //we have to set it to null cuz C# complains
-                switch (promoteOption)
-                {
-                    case PromoteOptions.Queen:
-                        promoted = new Queen(to.Chessman);
-                        break;
-                    case PromoteOptions.Rook:
-                        promoted = new Rook(to.Chessman);
-                        break;
-                    case PromoteOptions.Bishop:
-                        promoted = new Bishop(to.Chessman);
-                        break;
-                    case PromoteOptions.Knight:
-                        promoted = new Knight(to.Chessman);
-                        break;
-                }
-
-                //Update the list with the new promoted chessman
-                chessmans.Remove(to.Chessman);
-                to.Chessman = promoted;
-                promoted.OnPlace(to); //Place it otherwise weird bugs occur
-                chessmans.Add(promoted);
-            }
-
-            //The code has to be in this exact order to prevent from listeners firing when we move into our own listened cells.
-            //Recalculate possible moves
-            to.Chessman.OnMove(to);
-            to.Chessman.Recalculate();
-
-            //Resets en passant
-            EnPassant = null;
-            EnPassantCapture = null;
-
-            //Handles en passant detection
-            if (to.Chessman is Pawn && Math.Abs(to.Y - from.Y) == 2)
-            {
-                EnPassant = GetCell(to.X, (from.Y > to.Y) ? from.Y - 1 : from.Y + 1);
-                EnPassantCapture = to;
-            }
+            return ValidateRange(value, boardArray.GetLength(0));
         }
 
-        /// <summary>
-        /// Is a chessman (usually a pawn) promotable if it's moving from a cell to another
-        /// </summary>
-        /// <param name="from">The cell where the chessman moves from</param>
-        /// <param name="to">The cell where the chessman moves to</param>
-        /// <returns>Whether the chessman on from is promotable</returns>
-        public bool IsPromotable(Cell from, Cell to)
+        public bool ValidateY(int value)
         {
-            return from.Chessman is Pawn && to.Y == (from.Chessman.Color == PlayerColor.White ? 7 : 0);
+            return ValidateRange(value, boardArray.GetLength(1));
         }
 
-        #endregion
+        public bool ValidatePoint(Point point)
+        {
+            return ValidateX(point.x) && ValidateY(point.y);
+        }
     }
 }

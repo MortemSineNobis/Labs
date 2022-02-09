@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MaterialDesignThemes.Wpf;
 
 namespace Chess.Engine
 {
@@ -91,7 +91,7 @@ namespace Chess.Engine
         /// <returns>If blocked is hittable after moving the from</returns>
         public abstract bool IsBlockedIfMove(ChessBoard.Cell from, ChessBoard.Cell to, ChessBoard.Cell blocked);
 
-        public abstract char Char { get; }
+        public abstract PackIcon Picture { get; }
 
         protected virtual bool canHit(ChessBoard.Cell cell)
         {

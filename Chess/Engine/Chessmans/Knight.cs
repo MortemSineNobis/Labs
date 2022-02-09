@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using MaterialDesignThemes.Wpf;
 
 namespace Chess.Engine.Chessmans
 {
@@ -76,6 +78,13 @@ namespace Chess.Engine.Chessmans
             return true;
         }
 
-        public override char Char => 'H'; //H for horse as we are using K for king
+        public override PackIcon Picture => new PackIcon
+        {
+            VerticalAlignment = VerticalAlignment.Center,
+            Kind = PackIconKind.ChessKnight,
+            Margin = new Thickness(0),
+            Height = 512,
+            Width = 512
+        };
     }
 }

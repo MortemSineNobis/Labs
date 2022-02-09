@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using MaterialDesignThemes.Wpf;
 
 namespace Chess.Engine
 {
+    public enum Moves
+    {
+        Normal, NoMoves, Move, Selected
+    }
     public enum PlayerColor
     {
         White, Black
@@ -32,7 +38,7 @@ namespace Chess.Engine
             get;
         }
 
-        private PlayerState playerState;
+        public PlayerState playerState;
 
         /// <summary>
         /// Currently selected promote option
@@ -110,11 +116,13 @@ namespace Chess.Engine
         /// Draws the game
         /// </summary>
         /// <param name="g">ConsoleGraphics object to draw with/to</param>
-        public void Draw(ConsoleGraphics g)
+        public List<(PackIcon icon, int X, int Y)> Draw(double size)
         {
-            g.FillArea(new CChar(' ', ConsoleColor.Black, ConsoleColor.DarkGray), 10, 5, 8, 8);
+            holdedNode = board.GetCell(6, 6);
+            //g.FillArea(new CChar(' ', ConsoleColor.Black, ConsoleColor.DarkGray), 10, 5, 8, 8);
 
             //7-j everywhere cuz it's reversed in chess
+            List<(PackIcon icon,int X, int Y)> res = new();
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
@@ -123,29 +131,22 @@ namespace Chess.Engine
                     ChessBoard.Cell cell = board.GetCell(i, j);
                     if (cell.Chessman != null)
                     {
-                        g.DrawTransparent(cell.Chessman.Char, (cell.Chessman.Color == PlayerColor.White) ? ConsoleColor.White : ConsoleColor.Black, 10 + i, 5 + (7 - j));
-                        if (cell.Chessman.LegalMoves.Count == 0)
-                        {
-                            g.SetBackground(ConsoleColor.DarkRed, 10 + i, 5 + (7 - j));
-                        }
+                        res.Add((GameGraphics.GetIcon(cell,size),7-i,7-j));
+                        //if (cell.Chessman.LegalMoves.Count == 0)
+                        //{
+                        //    g.SetBackground(ConsoleColor.DarkRed, 10 + i, 5 + (7 - j));
+                        //}
                     }
 
-                    if (cell.HitBy.Contains(debugChessman))
-                        g.SetBackground(ConsoleColor.DarkMagenta, 10 + i, 5 + (7 - j));
+                    //if (cell.HitBy.Contains(debugChessman))
+                    //    g.SetBackground(ConsoleColor.DarkMagenta, 10 + i, 5 + (7 - j));
                 }
             }
 
-            if (holdedNode != null && playerState == PlayerState.Holding)
-            {
-                //Highlight legal moves
-                foreach (ChessBoard.Cell move in holdedNode.Chessman.LegalMoves)
-                {
-                    g.SetBackground(ConsoleColor.DarkGreen, 10 + move.X, 5 + (7 - move.Y));
-                }
-            }
+            
 
             //Sets the cursor color -> yellow
-            g.SetBackground(ConsoleColor.DarkYellow, 10 + cursorX, 5 + (7 - cursorY));
+            //g.SetBackground(ConsoleColor.D    arkYellow, 10 + cursorX, 5 + (7 - cursorY));
 
             //TODO: Remove en passant testing
             /*if (board.EnPassant != null)
@@ -154,27 +155,42 @@ namespace Chess.Engine
                 g.SetBackground(ConsoleColor.DarkMagenta, 10 + board.EnPassantCapture.X, 5 + (7 - board.EnPassantCapture.Y));*/
 
             //Lighten for checkerboard pattern
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if ((i + j) % 2 == 1) g.LightenBackground(10 + i, 5 + j);
-                }
-            }
+            //for (int i = 0; i < 8; i++)
+            //{
+            //    for (int j = 0; j < 8; j++)
+            //    {
+            //        if ((i + j) % 2 == 1) g.LightenBackground(10 + i, 5 + j);
+            //    }
+            //}
 
             //Promotion option menu
 
-            if (playerState == PlayerState.AwaitPromote)
+            //if (playerState == PlayerState.AwaitPromote)
+            //{
+            //    g.DrawTextTrasparent("Queen", promoteOption == PromoteOptions.Queen ? ConsoleColor.Yellow : ConsoleColor.White, 22, 7);
+            //    g.DrawTextTrasparent("Rook", promoteOption == PromoteOptions.Rook ? ConsoleColor.Yellow : ConsoleColor.White, 22, 9);
+            //    g.DrawTextTrasparent("Bishop", promoteOption == PromoteOptions.Bishop ? ConsoleColor.Yellow : ConsoleColor.White, 22, 11);
+            //    g.DrawTextTrasparent("Knight", promoteOption == PromoteOptions.Knight ? ConsoleColor.Yellow : ConsoleColor.White, 22, 13);
+            //}
+            //else
+            //{
+            //    g.ClearArea(22, 7, 6, 7);
+            //}
+            return res;
+        }
+
+        public List<(Brush b, int X, int Y)> DrawBack()
+        {
+            List<(Brush b, int X, int Y)> brushes = new();
+            if (holdedNode != null && playerState == PlayerState.Holding)
             {
-                g.DrawTextTrasparent("Queen", promoteOption == PromoteOptions.Queen ? ConsoleColor.Yellow : ConsoleColor.White, 22, 7);
-                g.DrawTextTrasparent("Rook", promoteOption == PromoteOptions.Rook ? ConsoleColor.Yellow : ConsoleColor.White, 22, 9);
-                g.DrawTextTrasparent("Bishop", promoteOption == PromoteOptions.Bishop ? ConsoleColor.Yellow : ConsoleColor.White, 22, 11);
-                g.DrawTextTrasparent("Knight", promoteOption == PromoteOptions.Knight ? ConsoleColor.Yellow : ConsoleColor.White, 22, 13);
+                //Highlight legal moves
+                foreach (ChessBoard.Cell move in holdedNode.Chessman.LegalMoves)
+                {
+                    brushes.Add((GameGraphics.SetBackground(Moves.Move), 7-move.X, 7-move.Y));
+                }
             }
-            else
-            {
-                g.ClearArea(22, 7, 6, 7);
-            }
+            return brushes;
         }
 
         #endregion
@@ -226,6 +242,12 @@ namespace Chess.Engine
             }
         }
 
+        public void SetHoldedNode(int x, int y)
+        {
+            cursorX = 7 - x;
+            cursorY = 7 - y;
+            interact();
+        }
 
         private Chessman debugChessman;
         private void debugInteract()
@@ -236,7 +258,7 @@ namespace Chess.Engine
         /// <summary>
         /// Happens when the user presses the escape key
         /// </summary>
-        private void cancel()
+        public void cancel()
         {
             playerState = PlayerState.Idle;
             holdedNode = null;

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using MaterialDesignThemes.Wpf;
 
 namespace Chess.Engine.Chessmans
 {
@@ -73,6 +75,13 @@ namespace Chess.Engine.Chessmans
             return true;
         }
 
-        public override char Char => 'Q';
+        public override PackIcon Picture => new PackIcon
+        {
+            VerticalAlignment = VerticalAlignment.Center,
+            Kind = PackIconKind.ChessQueen,
+            Margin = new Thickness(0),
+            Height = 512,
+            Width = 512
+        };
     }
 }

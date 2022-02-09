@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using MaterialDesignThemes.Wpf;
 
 namespace Chess.Engine.Chessmans
 {
@@ -60,7 +62,14 @@ namespace Chess.Engine.Chessmans
             return hits[0] != blocked && hits[1] != blocked;
         }
 
-        public override char Char => 'P';
+        public override PackIcon Picture => new PackIcon
+        {
+            VerticalAlignment = VerticalAlignment.Center,
+            Kind = PackIconKind.ChessPawn,
+            Margin = new Thickness(0),
+            Height = 512,
+            Width = 512
+        };
 
         protected override bool canHit(ChessBoard.Cell cell)
         {

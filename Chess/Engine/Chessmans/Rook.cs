@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using MaterialDesignThemes.Wpf;
 
 namespace Chess.Engine.Chessmans
 {
@@ -66,6 +68,9 @@ namespace Chess.Engine.Chessmans
             return true;
         }
 
-        public override char Char => 'R';
+        public override PackIcon Picture => new PackIcon
+        {
+            Kind = PackIconKind.ChessRook,
+        };
     }
 }

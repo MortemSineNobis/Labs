@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chess"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -36,278 +37,541 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            
             <!--#region ColorGrid-->
-            <!--First line-->
             <Rectangle
+                x:Name="c00"
                 Grid.Row="0"
                 Grid.Column="0"
-                Fill="#ebecd0"/>
-            <Rectangle
+                />
+            <!--#region First line-->
+            <materialDesign:PackIcon
+                Background="#ebecd0"
+                Grid.Row="0"
+                Grid.Column="0"
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="0"
                 Grid.Column="1"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="0"
                 Grid.Column="2"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="0"
                 Grid.Column="3"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="0"
                 Grid.Column="4"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="0"
                 Grid.Column="5"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="0"
                 Grid.Column="6"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="0"
                 Grid.Column="7"
-                Fill="#779556"/>
-
-            <!--Second line-->
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <!--#endregion-->
+            <!--#region Second line-->
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="1"
                 Grid.Column="0"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="1"
                 Grid.Column="1"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="1"
                 Grid.Column="2"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="1"
                 Grid.Column="3"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="1"
                 Grid.Column="4"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="1"
                 Grid.Column="5"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="1"
                 Grid.Column="6"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="1"
                 Grid.Column="7"
-                Fill="#ebecd0"/>
-            
-            <!--Third line-->
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <!--#endregion-->
+            <!--#region Third line-->
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="2"
                 Grid.Column="0"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="2"
                 Grid.Column="1"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="2"
                 Grid.Column="2"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="2"
                 Grid.Column="3"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="2"
                 Grid.Column="4"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="2"
                 Grid.Column="5"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="2"
                 Grid.Column="6"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="2"
                 Grid.Column="7"
-                Fill="#779556"/>
-            
-            <!--Forth line-->
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <!--#endregion-->
+            <!--#region Forth line-->
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="3"
                 Grid.Column="0"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="3"
                 Grid.Column="1"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="3"
                 Grid.Column="2"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="3"
                 Grid.Column="3"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="3"
                 Grid.Column="4"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="3"
                 Grid.Column="5"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="3"
                 Grid.Column="6"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="3"
                 Grid.Column="7"
-                Fill="#ebecd0"/>
-            
-            <!--Fifth line-->
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <!--#endregion-->
+            <!--#region Fifth line-->
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="4"
                 Grid.Column="0"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="4"
                 Grid.Column="1"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="4"
                 Grid.Column="2"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="4"
                 Grid.Column="3"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="4"
                 Grid.Column="4"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="4"
                 Grid.Column="5"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="4"
                 Grid.Column="6"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="4"
                 Grid.Column="7"
-                Fill="#779556"/>
-            
-            <!--Sixth line-->
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <!--#endregion-->
+            <!--#region Sixth line-->
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="5"
                 Grid.Column="0"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="5"
                 Grid.Column="1"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="5"
                 Grid.Column="2"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="5"
                 Grid.Column="3"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="5"
                 Grid.Column="4"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="5"
                 Grid.Column="5"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="5"
                 Grid.Column="6"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="5"
                 Grid.Column="7"
-                Fill="#ebecd0"/>
-
-            <!--Seventh line-->
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <!--#endregion-->
+            <!--#region Seventh line-->
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="6"
                 Grid.Column="0"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="6"
                 Grid.Column="1"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="6"
                 Grid.Column="2"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="6"
                 Grid.Column="3"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="6"
                 Grid.Column="4"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="6"
                 Grid.Column="5"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="6"
                 Grid.Column="6"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="6"
                 Grid.Column="7"
-                Fill="#779556"/>
-            
-            <!--Eighth line-->
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <!--#endregion-->
+            <!--#region Eighth line-->
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="7"
                 Grid.Column="0"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="7"
                 Grid.Column="1"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="7"
                 Grid.Column="2"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="7"
                 Grid.Column="3"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="7"
                 Grid.Column="4"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="7"
                 Grid.Column="5"
-                Fill="#ebecd0"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#779556"
                 Grid.Row="7"
                 Grid.Column="6"
-                Fill="#779556"/>
-            <Rectangle
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <materialDesign:PackIcon
+                Background="#ebecd0"
                 Grid.Row="7"
                 Grid.Column="7"
-                Fill="#ebecd0"/>
+                Kind="None"
+                Width="{Binding ActualHeight, ElementName = c00}"
+                Height="{Binding ActualHeight, ElementName = c00}"
+                MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
+            <!--#endregion-->
             <!--#endregion-->
             
         </Grid>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Chess.Engine.Pieces;
 
 namespace Chess.Engine
 {
@@ -35,19 +36,20 @@ namespace Chess.Engine
                 "King", "Bishop", "Knight", "Rook",
                 "Pawn", "Pawn", "Pawn", "Pawn",
                 "Pawn", "Pawn", "Pawn", "Pawn" };
-
+            var King = new King();
+            Console.WriteLine(King.GetType());
             for (int i = 0; i < COLUMNS; i++)
             {
                 // Player 0 pieces
                 boardArray[i, 0] = (ChessPiece)Activator.CreateInstance(
-                                                Type.GetType("Chess." + playerPeices[i]));
+                                                Type.GetType("Chess.Engine.Pieces." + playerPeices[i]));
                 boardArray[i, 1] = (ChessPiece)Activator.CreateInstance(
-                                                Type.GetType("Chess." + playerPeices[i + COLUMNS]));
+                                                Type.GetType("Chess.Engine.Pieces." + playerPeices[i + COLUMNS]));
                 // Player 1 pieces
                 boardArray[i, ROWS - 1] = (ChessPiece)Activator.CreateInstance(
-                                                Type.GetType("Chess." + playerPeices[i]), new object[] { 1 });
+                                                Type.GetType("Chess.Engine.Pieces." + playerPeices[i]), new object[] { 1 });
                 boardArray[i, ROWS - 2] = (ChessPiece)Activator.CreateInstance(
-                                                Type.GetType("Chess." + playerPeices[i + COLUMNS]), new object[] { 1 });
+                                                Type.GetType("Chess.Engine.Pieces." + playerPeices[i + COLUMNS]), new object[] { 1 });
             }
             return this;
         }

@@ -6,12 +6,13 @@
         xmlns:local="clr-namespace:Chess"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="500">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
         <Grid
             Grid.Column="0"
             HorizontalAlignment="Left"
@@ -26,6 +27,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition MaxWidth="25"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -36,8 +38,9 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition MaxHeight="25"/>
             </Grid.RowDefinitions>
-            
+
             <!--#region ColorGrid-->
             <Rectangle
                 x:Name="c00"
@@ -47,6 +50,7 @@
             <!--#region First line-->
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="0"
                 Grid.Column="0"
                 Kind="None"
@@ -55,6 +59,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="0"
                 Grid.Column="1"
                 Kind="None"
@@ -63,6 +68,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="0"
                 Grid.Column="2"
                 Kind="None"
@@ -71,6 +77,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="0"
                 Grid.Column="3"
                 Kind="None"
@@ -79,6 +86,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="0"
                 Grid.Column="4"
                 Kind="None"
@@ -87,6 +95,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="0"
                 Grid.Column="5"
                 Kind="None"
@@ -95,6 +104,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="0"
                 Grid.Column="6"
                 Kind="None"
@@ -103,6 +113,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="0"
                 Grid.Column="7"
                 Kind="None"
@@ -113,6 +124,7 @@
             <!--#region Second line-->
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="1"
                 Grid.Column="0"
                 Kind="None"
@@ -121,6 +133,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="1"
                 Grid.Column="1"
                 Kind="None"
@@ -129,6 +142,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="1"
                 Grid.Column="2"
                 Kind="None"
@@ -137,6 +151,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="1"
                 Grid.Column="3"
                 Kind="None"
@@ -145,6 +160,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="1"
                 Grid.Column="4"
                 Kind="None"
@@ -153,6 +169,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="1"
                 Grid.Column="5"
                 Kind="None"
@@ -161,6 +178,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="1"
                 Grid.Column="6"
                 Kind="None"
@@ -169,6 +187,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="1"
                 Grid.Column="7"
                 Kind="None"
@@ -179,6 +198,7 @@
             <!--#region Third line-->
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="2"
                 Grid.Column="0"
                 Kind="None"
@@ -191,10 +211,12 @@
                 Grid.Column="1"
                 Kind="None"
                 Width="{Binding ActualHeight, ElementName = c00}"
+                Uid="#779556"
                 Height="{Binding ActualHeight, ElementName = c00}"
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="2"
                 Grid.Column="2"
                 Kind="None"
@@ -205,12 +227,14 @@
                 Background="#779556"
                 Grid.Row="2"
                 Grid.Column="3"
+                Uid="#779556"
                 Kind="None"
                 Width="{Binding ActualHeight, ElementName = c00}"
                 Height="{Binding ActualHeight, ElementName = c00}"
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="2"
                 Grid.Column="4"
                 Kind="None"
@@ -219,6 +243,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="2"
                 Grid.Column="5"
                 Kind="None"
@@ -227,6 +252,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="2"
                 Grid.Column="6"
                 Kind="None"
@@ -235,6 +261,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="2"
                 Grid.Column="7"
                 Kind="None"
@@ -245,6 +272,7 @@
             <!--#region Forth line-->
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="3"
                 Grid.Column="0"
                 Kind="None"
@@ -253,6 +281,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="3"
                 Grid.Column="1"
                 Kind="None"
@@ -261,6 +290,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="3"
                 Grid.Column="2"
                 Kind="None"
@@ -269,6 +299,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="3"
                 Grid.Column="3"
                 Kind="None"
@@ -277,6 +308,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="3"
                 Grid.Column="4"
                 Kind="None"
@@ -285,6 +317,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="3"
                 Grid.Column="5"
                 Kind="None"
@@ -293,6 +326,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="3"
                 Grid.Column="6"
                 Kind="None"
@@ -301,6 +335,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="3"
                 Grid.Column="7"
                 Kind="None"
@@ -311,6 +346,7 @@
             <!--#region Fifth line-->
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="4"
                 Grid.Column="0"
                 Kind="None"
@@ -319,6 +355,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="4"
                 Grid.Column="1"
                 Kind="None"
@@ -327,6 +364,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="4"
                 Grid.Column="2"
                 Kind="None"
@@ -335,6 +373,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="4"
                 Grid.Column="3"
                 Kind="None"
@@ -343,6 +382,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="4"
                 Grid.Column="4"
                 Kind="None"
@@ -351,6 +391,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="4"
                 Grid.Column="5"
                 Kind="None"
@@ -359,6 +400,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="4"
                 Grid.Column="6"
                 Kind="None"
@@ -367,6 +409,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="4"
                 Grid.Column="7"
                 Kind="None"
@@ -377,6 +420,7 @@
             <!--#region Sixth line-->
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="5"
                 Grid.Column="0"
                 Kind="None"
@@ -385,6 +429,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="5"
                 Grid.Column="1"
                 Kind="None"
@@ -393,6 +438,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="5"
                 Grid.Column="2"
                 Kind="None"
@@ -401,6 +447,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="5"
                 Grid.Column="3"
                 Kind="None"
@@ -409,6 +456,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="5"
                 Grid.Column="4"
                 Kind="None"
@@ -417,6 +465,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="5"
                 Grid.Column="5"
                 Kind="None"
@@ -425,6 +474,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="5"
                 Grid.Column="6"
                 Kind="None"
@@ -433,6 +483,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="5"
                 Grid.Column="7"
                 Kind="None"
@@ -443,6 +494,7 @@
             <!--#region Seventh line-->
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="6"
                 Grid.Column="0"
                 Kind="None"
@@ -451,6 +503,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="6"
                 Grid.Column="1"
                 Kind="None"
@@ -459,6 +512,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="6"
                 Grid.Column="2"
                 Kind="None"
@@ -467,6 +521,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="6"
                 Grid.Column="3"
                 Kind="None"
@@ -475,6 +530,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="6"
                 Grid.Column="4"
                 Kind="None"
@@ -483,6 +539,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="6"
                 Grid.Column="5"
                 Kind="None"
@@ -491,6 +548,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="6"
                 Grid.Column="6"
                 Kind="None"
@@ -499,6 +557,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="6"
                 Grid.Column="7"
                 Kind="None"
@@ -509,6 +568,7 @@
             <!--#region Eighth line-->
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="7"
                 Grid.Column="0"
                 Kind="None"
@@ -517,6 +577,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="7"
                 Grid.Column="1"
                 Kind="None"
@@ -525,6 +586,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="7"
                 Grid.Column="2"
                 Kind="None"
@@ -533,6 +595,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="7"
                 Grid.Column="3"
                 Kind="None"
@@ -541,6 +604,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="7"
                 Grid.Column="4"
                 Kind="None"
@@ -549,6 +613,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="7"
                 Grid.Column="5"
                 Kind="None"
@@ -557,6 +622,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#779556"
+                Uid="#779556"
                 Grid.Row="7"
                 Grid.Column="6"
                 Kind="None"
@@ -565,6 +631,7 @@
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <materialDesign:PackIcon
                 Background="#ebecd0"
+                Uid="#ebecd0"
                 Grid.Row="7"
                 Grid.Column="7"
                 Kind="None"
@@ -572,11 +639,113 @@
                 Height="{Binding ActualHeight, ElementName = c00}"
                 MouseLeftButtonUp="PackIcon_MouseLeftButtonUp"/>
             <!--#endregion-->
+            <!--#region Names-->
+            <!--#region Chars-->
+            <TextBlock
+                Text="A"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="8"
+                Grid.Column="0"/>
+            <TextBlock
+                Text="B"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="8"
+                Grid.Column="1"/>
+            <TextBlock
+                Text="C"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="8"
+                Grid.Column="2"/>
+            <TextBlock
+                Text="D"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="8"
+                Grid.Column="3"/>
+            <TextBlock
+                Text="E"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="8"
+                Grid.Column="4"/>
+            <TextBlock
+                Text="F"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="8"
+                Grid.Column="5"/>
+            <TextBlock
+                Text="G"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="8"
+                Grid.Column="6"/>
+            <TextBlock
+                Text="H"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="8"
+                Grid.Column="7"/>
             <!--#endregion-->
-            
+            <!--#region Numbers-->
+            <TextBlock
+                Text="8"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="0"
+                Grid.Column="8"/>
+            <TextBlock
+                Text="7"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="1"
+                Grid.Column="8"/>
+            <TextBlock
+                Text="6"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="2"
+                Grid.Column="8"/>
+            <TextBlock
+                Text="5"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="3"
+                Grid.Column="8"/>
+            <TextBlock
+                Text="4"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="4"
+                Grid.Column="8"/>
+            <TextBlock
+                Text="3"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="5"
+                Grid.Column="8"/>
+            <TextBlock
+                Text="2"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="6"
+                Grid.Column="8"/>
+            <TextBlock
+                Text="1"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="7"
+                Grid.Column="8"/>
+
+            <!--#endregion-->
+            <!--#endregion-->
+
         </Grid>
-        <ListBox
-            x:Name="History"
+        <ListBox 
+            x:Name="history"
             Grid.Column="1"/>
     </Grid>
 </Window>
